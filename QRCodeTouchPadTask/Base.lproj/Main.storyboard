@@ -2,12 +2,29 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0eh-0y-5uF">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--QRCodeAVFViewController-->
+        <scene sceneID="YvO-c4-UcG">
+            <objects>
+                <viewController storyboardIdentifier="QRCodeAVFViewController" title="QRCodeAVFViewController" id="hKv-R7-c88" customClass="QRCodeAVFViewController" customModule="QRCodeTouchPadTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gse-Qk-hKS" customClass="QRCodeAVF">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="8Kt-5L-GpH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wv3-jh-fAx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="63D-kc-1pO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="590" y="-725"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -17,27 +34,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-kU-sRE">
-                                <rect key="frame" x="59" y="383.66666666666669" width="275" height="35"/>
+                                <rect key="frame" x="59" y="385" width="275" height="32"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Scan QR Code"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Scan QR Code with Core Image">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <segue destination="UUc-G3-X1t" kind="show" id="sUg-Ij-Ncd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlP-xN-BcC">
-                                <rect key="frame" x="59" y="448.66666666666669" width="275" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWi-R4-O1h">
+                                <rect key="frame" x="59" y="323" width="275" height="32"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Signature Pad"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Scan QR Code With Vision">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="Prc-VN-Y41" kind="show" id="MEI-He-ORn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlP-xN-BcC">
+                                <rect key="frame" x="59" y="447" width="275" height="32"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Signature Pad">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <segue destination="bQJ-An-Qp3" kind="show" id="Yxo-4X-r2Y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQw-2t-ZQ0">
-                                <rect key="frame" x="59" y="513.66666666666663" width="275" height="35"/>
+                                <rect key="frame" x="59" y="509" width="275" height="32"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="UI Pan Signature Pad"/>
+                                <buttonConfiguration key="configuration" style="filled" title="UI Pan Signature Pad">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <segue destination="TOy-LW-5Mb" kind="show" id="qiU-Xq-Ytr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eui-XQ-4pe">
+                                <rect key="frame" x="59" y="261" width="275" height="32"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Scan QR Code With AVF">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="hKv-R7-c88" kind="show" id="9Rv-NH-UlW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -46,12 +89,18 @@
                         <constraints>
                             <constraint firstItem="y2D-kU-sRE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Hb-8Q-uhF"/>
                             <constraint firstItem="y2D-kU-sRE" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="6k5-tn-hnX"/>
+                            <constraint firstItem="aWi-R4-O1h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7hJ-Ex-ege"/>
                             <constraint firstItem="y2D-kU-sRE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-25" id="CG7-ym-Tag"/>
                             <constraint firstItem="gQw-2t-ZQ0" firstAttribute="width" secondItem="NlP-xN-BcC" secondAttribute="width" id="NzX-9S-vYO"/>
+                            <constraint firstItem="Eui-XQ-4pe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QtH-OU-JgK"/>
+                            <constraint firstItem="aWi-R4-O1h" firstAttribute="top" secondItem="Eui-XQ-4pe" secondAttribute="bottom" constant="30" id="ULF-pU-sF1"/>
                             <constraint firstItem="NlP-xN-BcC" firstAttribute="top" secondItem="y2D-kU-sRE" secondAttribute="bottom" constant="30" id="VT5-7q-c1N"/>
                             <constraint firstItem="NlP-xN-BcC" firstAttribute="centerX" secondItem="y2D-kU-sRE" secondAttribute="centerX" id="Vaj-cP-if7"/>
                             <constraint firstItem="gQw-2t-ZQ0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c4r-DV-MH5"/>
+                            <constraint firstItem="Eui-XQ-4pe" firstAttribute="width" secondItem="aWi-R4-O1h" secondAttribute="width" id="glF-IH-VFh"/>
                             <constraint firstItem="gQw-2t-ZQ0" firstAttribute="top" secondItem="NlP-xN-BcC" secondAttribute="bottom" constant="30" id="h6D-AK-Fac"/>
+                            <constraint firstItem="aWi-R4-O1h" firstAttribute="width" secondItem="y2D-kU-sRE" secondAttribute="width" id="plB-Rz-a7r"/>
+                            <constraint firstItem="y2D-kU-sRE" firstAttribute="top" secondItem="aWi-R4-O1h" secondAttribute="bottom" constant="30" id="qgV-yU-756"/>
                             <constraint firstItem="NlP-xN-BcC" firstAttribute="width" secondItem="y2D-kU-sRE" secondAttribute="width" id="uEI-20-fkJ"/>
                         </constraints>
                     </view>
@@ -275,6 +324,57 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1585" y="667"/>
+        </scene>
+        <!--QRCodeVisionViewController-->
+        <scene sceneID="JKX-Dq-QbX">
+            <objects>
+                <viewController storyboardIdentifier="QRCodeVisionViewController" title="QRCodeVisionViewController" id="Prc-VN-Y41" customClass="QRCodeVisionViewController" customModule="QRCodeTouchPadTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PP0-k9-ffx">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="tiv-cv-c7s">
+                                <rect key="frame" x="20" y="351" width="353" height="150"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDA-fg-IoM">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="65"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Scan from Gallery">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="btnGallery:" destination="Prc-VN-Y41" eventType="touchUpInside" id="3hW-yT-Hx5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdM-aY-2li">
+                                        <rect key="frame" x="0.0" y="85" width="353" height="65"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Scan with Camera">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="btnCamera:" destination="Prc-VN-Y41" eventType="touchUpInside" id="qlX-Nh-BXV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="smh-fL-PU4"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZWz-nZ-5Ia"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tiv-cv-c7s" firstAttribute="centerY" secondItem="PP0-k9-ffx" secondAttribute="centerY" id="MSx-R9-fw3"/>
+                            <constraint firstItem="tiv-cv-c7s" firstAttribute="leading" secondItem="ZWz-nZ-5Ia" secondAttribute="leading" constant="20" id="evJ-yx-6H8"/>
+                            <constraint firstItem="ZWz-nZ-5Ia" firstAttribute="trailing" secondItem="tiv-cv-c7s" secondAttribute="trailing" constant="20" id="fPn-18-BKu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fFI-g4-BCB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zuZ-4w-R8V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="688"/>
         </scene>
     </scenes>
     <resources>

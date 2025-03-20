@@ -1,15 +1,15 @@
 //
-//  QRCodeViewController.swift
+//  QRCodeVisionViewController.swift
 //  QRCodeTouchPadTask
 //
 //  Created by Kailash Rajput on 20/03/25.
 //
 
 import UIKit
-import CoreImage
 import AVFoundation
+import Vision
 
-class QRCodeViewController: UIViewController {
+class QRCodeVisionViewController: UIViewController {
     private let pickerImage = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -68,7 +68,7 @@ class QRCodeViewController: UIViewController {
     }
 }
 
-extension QRCodeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension QRCodeVisionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(
         _ picker: UIImagePickerController,
@@ -80,47 +80,60 @@ extension QRCodeViewController: UIImagePickerControllerDelegate, UINavigationCon
             showAlert(title: "Error", message: "Failed to get image")
             return
         }
-        processQRCode(from: image)
+        processQRCodeWithVision(from: image)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
     
-    private func processQRCode(from image: UIImage) {
-        guard let ciImage = CIImage(image: image) else {
+    private func processQRCodeWithVision(from image: UIImage) {
+        guard let cgImage = image.cgImage else {
             showAlert(title: "Error", message: "Failed to process image")
             return
         }
         
-        let context = CIContext()
-        let options = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
-        
-        guard let detector = CIDetector(
-            ofType: CIDetectorTypeQRCode,
-            context: context,
-            options: options
-        ) else {
-            showAlert(title: "Error", message: "QR Code detection failed")
-            return
-        }
-        
-        let features = detector.features(in: ciImage)
-        
-        guard !features.isEmpty else {
-            showAlert(title: "No QR Code", message: "No QR code detected in the image")
-            return
-        }
-        
-        var results = [String]()
-        for case let feature as CIQRCodeFeature in features {
-            if let message = feature.messageString {
-                results.append(message)
+        let request = VNDetectBarcodesRequest { [weak self] request, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                }
+                return
+            }
+            
+            guard let observations = request.results as? [VNBarcodeObservation] else {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "No QR Code", message: "No QR code detected in the image")
+                }
+                return
+            }
+            
+            var results = [String]()
+            for observation in observations where observation.symbology == .qr {
+                if let payload = observation.payloadStringValue {
+                    results.append(payload)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                if !results.isEmpty {
+                    self.showResultsAlert(messages: results)
+                } else {
+                    self.showAlert(title: "No QR Code", message: "No valid QR code detected")
+                }
             }
         }
         
-        if !results.isEmpty {
-            showResultsAlert(messages: results)
+        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        
+        do {
+            try handler.perform([request])
+        } catch {
+            DispatchQueue.main.async {
+                self.showAlert(title: "Error", message: error.localizedDescription)
+            }
         }
     }
     
@@ -133,7 +146,7 @@ extension QRCodeViewController: UIImagePickerControllerDelegate, UINavigationCon
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
-          
+        
         print("Detected QR Code Contents:")
         messages.forEach { print("- \($0)") }
     }
