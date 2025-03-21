@@ -106,11 +106,11 @@ class SignatureViewController: UIViewController {
         
         let alert = UIAlertController(title: "Save As", message: "Choose image format", preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "PNG (High Quality)", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "PNG", style: .default) { _ in
             self.handleImageSave(image: signatureImage, format: .png)
         })
         
-        alert.addAction(UIAlertAction(title: "JPEG (High Quality)", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: "JPEG", style: .default) { _ in
             self.handleImageSave(image: signatureImage, format: .jpeg)
         })
         
